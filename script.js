@@ -5,7 +5,7 @@ const person = function (firstName, birthYear) {
   this.firstName = firstName;
   this.birthYear = birthYear;
 };
-
+// 'new ' === []
 const alan = new person('Alan', 2003);
 const jack = new person('Jack', 2002);
 const jonas = new person('Jonas', 2001);
@@ -92,3 +92,15 @@ mercedes.brake();
 bMW.accelerete();
 bMW.accelerete();
 bMW.accelerete();
+
+const PersonCL = class {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  calcAgeFunc() {
+    console.log(2024 - this.birthYear);
+  } // as you can see we can create method right inside here and it is now the prototype property of PersonCl object and its adobted children . Alan has just been newly adopted as the child of PersonCL👇😅
+};
+const Alan = new PersonCL('Alan', 2003);
+Alan.calcAgeFunc(); // 21
