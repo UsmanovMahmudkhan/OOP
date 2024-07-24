@@ -94,9 +94,13 @@ bMW.accelerete();
 bMW.accelerete();
 
 const PersonCL = class {
+  // so we use constructor proto to cteate this function
   constructor(firstName, birthYear) {
     this.firstName = firstName;
     this.birthYear = birthYear;
+  }
+  greet() {
+    console.log(`Hello ${this.firstName}`);
   }
   calcAgeFunc() {
     console.log(2024 - this.birthYear);
@@ -104,3 +108,7 @@ const PersonCL = class {
 };
 const Alan = new PersonCL('Alan', 2003);
 Alan.calcAgeFunc(); // 21
+Alan.greet(); // Hello Alan
+//1  Classes are Not hoisted
+//2  Classes are first-class citizens
+//3  Classes are executed in 'strict' mode
