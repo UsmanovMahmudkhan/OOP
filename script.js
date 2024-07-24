@@ -46,7 +46,49 @@ console.log(jonas.__proto__); //{kerakliCode: 2321, calcAge: ƒ}
 //kerakliCode: 2321
 person.prototype.alan = 2003; // alan qoshildi object bolp
 console.log(jonas.__proto__);
-
+//top of prototype chain
+console.log(jonas.__proto__.__proto__);
 console.log(person.prototype.isPrototypeOf(jonas)); //true
 //prototyeOfLinkedObjects
 console.log(jonas.kerakliCode); //2321
+console.dir(person.prototype.constructor);
+
+//next level
+// prototypes
+const arr = [4, 5, 5, 3, 4, 34, 2];
+/// yangi method yratdim yeeees bu hozir Array prototypeda mavjud va shu yol bilan biz ozimizga kerakli bolgan functiondi prototypega method sidatida qoshib olishmiz mumkin.
+Array.prototype.deleteSame = function () {
+  return [...new Set(this)];
+};
+
+console.log(arr.deleteSame());
+//all dom elements are objects behind the scenes
+const h1 = document.querySelector('h1');
+console.dir(h1);
+// functions are objects
+
+console.log(Array.prototype.constructor(...arr));
+
+const Car = function (car, speed) {
+  this.car = Car;
+  this.speed = speed;
+};
+Car.prototype.accelerete = function () {
+  this.speed += 10;
+  console.log(`${this.speed}km/h`);
+};
+Car.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(`${this.speed}km/h`);
+};
+const bMW = new Car('BMW', 120);
+const mercedes = new Car('Mercedes', 95);
+console.log(bMW);
+console.log(mercedes);
+
+bMW.brake();
+mercedes.accelerete();
+mercedes.brake();
+bMW.accelerete();
+bMW.accelerete();
+bMW.accelerete();
