@@ -99,6 +99,7 @@ const PersonCL = class {
     this.fullName = fullName;
     this.birthYear = birthYear;
   }
+  // Methods will be added to .prototype property
   get age() {
     return 2024 - this.birthYear;
   }
@@ -115,12 +116,18 @@ const PersonCL = class {
   calcAgeFunc() {
     console.log(2024 - this.birthYear);
   } // as you can see we can create method right inside here and it is now the prototype property of PersonCl object and its adobted children . Alan has just been newly adopted as the child of PersonCL👇😅
+
+  // static methods
+  static hey() {
+    console.log('hello there 👑'); // static methods can only be acceses through the main class object . does not work with children
+  }
 };
-const Alan = new PersonCL('Muhammadaziz Kholdarov', 2003);
+const Alan = new PersonCL('Muhammadaziz Kholdarov', 2003); // mana
 Alan.calcAgeFunc(); // 21
 Alan.greet(); // Hello Alan
 console.log(Alan.fullName, 'this owner');
 console.log(Alan.age, 'this.owner');
+PersonCL.hey(); // static methods can only be acceses through the main class object . does not work with children
 //1  Classes are Not hoisted
 //2  Classes are first-class citizens
 //3  Classes are executed in 'strict' mode
@@ -139,3 +146,27 @@ const owner = {
 console.log(owner.latest);
 owner.latest = 50;
 console.log(owner.transactions);
+const personProto = {
+  calcAge() {
+    console.log(2024 - this.birthYear);
+  },
+  adds(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+let james = Object.create(personProto);
+console.log(james); //{}
+james.adds('Alan', 2003);
+console.log(james);
+james.calcAge();
+const jessy = Object.create(personProto);
+jessy.adds('Jessy', 2006);
+jessy.calcAge();
+console.log(jessy); //
+// birthYear: 2006
+// firstName: "Jessy"
+// [[Prototype]]: Object
+// adds: ƒ adds(firstName, birthYear)
+// calcAge: ƒ calcAge()
