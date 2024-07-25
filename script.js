@@ -1,8 +1,8 @@
 'use strict';
 //arrow function does not work as it does not have its own this keyword
 // but in this ""cuntroctor"" function we need this keyword
-const person = function (firstName, birthYear) {
-  this.firstName = firstName;
+const person = function (fullName, birthYear) {
+  this.fullName = fullName;
   this.birthYear = birthYear;
 };
 // 'new ' === []
@@ -22,23 +22,23 @@ alan.calcAge();
 
 const m = {
   birthYear: this.birthYear,
-  firstName: this.firstName,
+  fullName: this.fullName,
 };
 // m.calcAge(); //error chunki calcAge function can be called only with person va instanceof person object
 //
 // Binding calcAge method to m
 const calcAgeForM = person.prototype.calcAge.bind(m);
 calcAgeForM();
-console.log(alan.hasOwnProperty('firstName')); //true
-console.log(jack.hasOwnProperty('firstName')); //true
+console.log(alan.hasOwnProperty('fullName')); //true
+console.log(jack.hasOwnProperty('fullName')); //true
 person.prototype.kerakliCode = 2321;
-console.log(alan); //person {firstName: 'Alan', birthYear: 2003}
+console.log(alan); //person {fullName: 'Alan', birthYear: 2003}
 // birthYear: 2003
-// firstName: "Alan"
+// fullName: "Alan"
 // [[Prototype]]: Object
 // calcAge: ƒ (person)
 // kerakliCode: 2321 mana biz yasagan++
-// constructor : ƒ (firstName birthYear)
+// constructor : ƒ (fullName birthYear)
 // [[Prototype]] : Object
 console.log(jonas.__proto__); //{kerakliCode: 2321, calcAge: ƒ}
 //bu jonas va boshqa personning bolalarini ozizni proto si
@@ -95,20 +95,47 @@ bMW.accelerete();
 
 const PersonCL = class {
   // so we use constructor proto to cteate this function
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
+  get age() {
+    return 2024 - this.birthYear;
+  }
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name`);
+  }
+  get fullName() {
+    return this._fullName;
+  }
   greet() {
-    console.log(`Hello ${this.firstName}`);
+    console.log(`Hello ${this.fullName}`);
   }
   calcAgeFunc() {
     console.log(2024 - this.birthYear);
   } // as you can see we can create method right inside here and it is now the prototype property of PersonCl object and its adobted children . Alan has just been newly adopted as the child of PersonCL👇😅
 };
-const Alan = new PersonCL('Alan', 2003);
+const Alan = new PersonCL('Muhammadaziz Kholdarov', 2003);
 Alan.calcAgeFunc(); // 21
 Alan.greet(); // Hello Alan
+console.log(Alan.fullName, 'this owner');
+console.log(Alan.age, 'this.owner');
 //1  Classes are Not hoisted
 //2  Classes are first-class citizens
 //3  Classes are executed in 'strict' mode
+
+const owner = {
+  owner: 'Alan',
+  transactions: [200, 231, 300, 600],
+
+  get latest() {
+    return this.transactions.slice().pop();
+  },
+  set latest(mov) {
+    return this.transactions.unshift(mov);
+  },
+};
+console.log(owner.latest);
+owner.latest = 50;
+console.log(owner.transactions);
