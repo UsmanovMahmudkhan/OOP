@@ -170,3 +170,41 @@ console.log(jessy); //
 // [[Prototype]]: Object
 // adds: ƒ adds(firstName, birthYear)
 // calcAge: ƒ calcAge()
+
+// challenge
+class Cars {
+  constructor(brandName, speed) {
+    this.brandName = brandName;
+    this.speed = speed;
+  }
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.speed}km/h`);
+  }
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.speed}km/h`);
+  }
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+  set speedUS(speedInKm) {
+    return (this.speed = speedInKm * 1.6);
+    // console.log(`Car's current speed is ${this.speed.toFixed(2)} km/h`);
+  }
+}
+const Ford = new Cars();
+console.log(Ford);
+Ford.brandName = 'Ford';
+Ford.speed = 120;
+
+console.log(Ford);
+Ford.accelerate();
+Ford.accelerate();
+Ford.accelerate();
+Ford.accelerate();
+Ford.brake();
+Ford.brake();
+Ford.brake();
+Ford.speedUS = 40; // means getter gets the value from the object itselft while setter is the value entered later like here speedUS = 40 we are setting a new value for the property
+console.log(Ford);
