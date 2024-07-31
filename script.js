@@ -239,3 +239,56 @@ alan.introduce();
 Student.prototype.constructor = Student;
 console.dir(Student.prototype.constructor);
 // console.log();
+
+// challenge
+
+class Car {
+  constructor(brand, speed, charge) {
+    this.brand = brand;
+    this.charge = charge;
+    this.speed = speed;
+  }
+  speedUp() {
+    this.speed += 20;
+    this.charge--;
+    console.log(
+      `${this.brand} going at ${this.speed} has battery of ${this.charge}%`
+    );
+  }
+  brake() {
+    this.speed -= 20;
+    console.log(`${this.speed}km/h`);
+  }
+}
+
+class EV extends Car {
+  // constructor(brand, speed, charge) {
+  // Car.call(this, brand, speed);
+
+  get chargeTo() {
+    return this.charge;
+  }
+  set chargeTo(_speed) {
+    if (_speed < 0) {
+      return _speed;
+    }
+  }
+  ChargeBattery(level) {
+    level = _speed;
+    this.charge = level;
+  }
+}
+
+const BMW = new EV('BMW', 120, 90);
+EV.prototype.constructor = EV;
+Car.prototype.constructor = Car;
+// BMW.speedUp();
+BMW.speedUp();
+BMW.speedUp();
+BMW.speed = 50;
+BMW.speedUp();
+BMW.speedUp();
+BMW.speedUp();
+BMW.brake();
+
+console.log(BMW);
