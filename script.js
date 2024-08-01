@@ -352,15 +352,28 @@ jake.introduce();
 jake.calcage();
 
 class accounts {
+  #movements;
+  #pin;
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this.pin = pin;
-    this.movements = [];
+    this.#pin = pin;
+    this.#movements = [];
     this.locale = navigator.language;
   }
+  getMovements() {
+    return this.#movements;
+  }
+  _approveLoan(val) {
+    return true;
+  }
+  requestLoan(val) {
+    if (this.approveLoan) this.deposit(val);
+    console.log('Loan Approved');
+  }
+  //public interface API
   deposit(val) {
-    this.movements.push(val);
+    this.#movements.push(val);
   }
   withdraw(val) {
     this.deposit(-val); // o'zimiznik scopedagi methodni this keyword yordamida chaqrib ishlatdik
