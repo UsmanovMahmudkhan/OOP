@@ -384,3 +384,5 @@ console.log(account1);
 account1.deposit(1300);
 account1.deposit(1200);
 account1.withdraw(1200);
+account1.withdraw(1200);
+account1.withdraw(1200);
