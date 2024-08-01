@@ -327,7 +327,7 @@ jonas.calcage();
 
 const TeacherProto = {
   calcage() {
-    console.log(2024 - this.b);
+    console.log(2024 - this.birthYear);
   },
   init(firstName, birthYear) {
     this.firstName = firstName;
@@ -340,6 +340,34 @@ StudentProto.init = function (firstName, birthYear, course) {
   TeacherProto.init.call(this, firstName, birthYear); // using teacher's code for DRY . do not repeat yourself
   this.course = course;
 };
+StudentProto.introduce = function () {
+  console.log(
+    `My name is ${this.firstName} and i nowadays study ${this.course || 'js'}`
+  );
+};
 const jake = Object.create(StudentProto);
-jake.init('Jake', 2002, 'JS');
+jake.init('Jake', 2002, 'javaScript');
 console.log(jake);
+jake.introduce();
+jake.calcage();
+
+class accounts {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+  }
+  deposit(val) {
+    this.movements.push(val);
+  }
+  withdraw(val) {
+    this.deposit(-val); // o'zimiznik scopedagi methodni this keyword yordamida chaqrib ishlatdik
+  }
+}
+const account1 = new accounts('Alan', 'USD', 1212);
+console.log(account1);
+account1.deposit(1300);
+account1.deposit(1200);
+account1.withdraw(1200);
