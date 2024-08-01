@@ -243,9 +243,9 @@ console.dir(Student.prototype.constructor);
 // challenge
 
 class Car {
-  constructor(brand, speed, charge) {
+  constructor(brand, speed) {
     this.brand = brand;
-    this.charge = charge;
+
     this.speed = speed;
   }
   speedUp() {
@@ -262,9 +262,11 @@ class Car {
 }
 
 class EV extends Car {
-  // constructor(brand, speed, charge) {
-  // Car.call(this, brand, speed);
-
+  constructor(brand, speed, charge) {
+    // Car.call(this, brand, speed);
+    super(brand, speed);
+    this.charge = charge;
+  }
   get chargeTo() {
     return this.charge;
   }
@@ -280,8 +282,8 @@ class EV extends Car {
 }
 
 const BMW = new EV('BMW', 120, 90);
-EV.prototype.constructor = EV;
-Car.prototype.constructor = Car;
+// EV.prototype.constructor = EV;
+// Car.prototype.constructor = Car;
 // BMW.speedUp();
 BMW.speedUp();
 BMW.speedUp();
@@ -292,3 +294,32 @@ BMW.speedUp();
 BMW.brake();
 
 console.log(BMW);
+
+class PersonCL {
+  constructor(firstName, birthYear) {
+    this.birthYear = birthYear;
+    this.firstName = firstName;
+  }
+  calcage() {
+    console.log(`hello ${this.firstName}`);
+  }
+  static greet() {
+    console.log('we are glad to have you static', this.firstName);
+  }
+}
+
+class Alan extends PersonCL {
+  constructor(firstName, birthYear, course) {
+    super(firstName, birthYear);
+    this.course = course;
+  }
+  calcage() {
+    console.log(`i feel sorry for you ${this.firstName} ${this.course}`);
+  }
+}
+const alann = new PersonCL('ALan', 2003);
+const jonas = new Alan('Jonas', 2003, 'js');
+
+console.log(jonas);
+console.log(alann);
+jonas.calcage();
