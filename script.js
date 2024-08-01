@@ -146,7 +146,7 @@
 // console.log(owner.latest);
 // owner.latest = 50;
 // console.log(owner.transactions);
-// const personProto = {
+// const TeacherProto = {
 //   calcAge() {
 //     console.log(2024 - this.birthYear);
 //   },
@@ -156,12 +156,12 @@
 //   },
 // };
 
-// let james = Object.create(personProto);
+// let james = Object.create(TeacherProto);
 // console.log(james); //{}
 // james.adds('Alan', 2003);
 // console.log(james);
 // james.calcAge();
-// const jessy = Object.create(personProto);
+// const jessy = Object.create(TeacherProto);
 // jessy.adds('Jessy', 2006);
 // jessy.calcAge();
 // console.log(jessy); //
@@ -323,3 +323,23 @@ const jonas = new Alan('Jonas', 2003, 'js');
 console.log(jonas);
 console.log(alann);
 jonas.calcage();
+//inharitance
+
+const TeacherProto = {
+  calcage() {
+    console.log(2024 - this.b);
+  },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const StudentProto = Object.create(TeacherProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  TeacherProto.init.call(this, firstName, birthYear); // using teacher's code for DRY . do not repeat yourself
+  this.course = course;
+};
+const jake = Object.create(StudentProto);
+jake.init('Jake', 2002, 'JS');
+console.log(jake);
