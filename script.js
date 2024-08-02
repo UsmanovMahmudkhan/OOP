@@ -350,39 +350,64 @@ jake.init('Jake', 2002, 'javaScript');
 console.log(jake);
 jake.introduce();
 jake.calcage();
-
+// class field proposal
+// 1) public fields
+// 2) private fields
+// 3) public methods
+// 4) private methods
 class accounts {
-  #movements;
+  // 1) public fields
+  locale = navigator.language;
+  // 2) private fields
+  #movements = [];
   #pin;
+
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
     this.#pin = pin;
-    this.#movements = [];
-    this.locale = navigator.language;
+    // this.#movements = [];
+    // this.locale = navigator.language;
   }
+  // 3) public methods
   getMovements() {
     return this.#movements;
   }
-  _approveLoan(val) {
-    return true;
-  }
+
   requestLoan(val) {
-    if (this.approveLoan) this.deposit(val);
+    if (this.#approveLoan(val)) this.deposit(val);
     console.log('Loan Approved');
+    return this;
   }
   //public interface API
   deposit(val) {
     this.#movements.push(val);
+    return this;
   }
   withdraw(val) {
     this.deposit(-val); // o'zimiznik scopedagi methodni this keyword yordamida chaqrib ishlatdik
+    return this;
   }
+  // 4) private methods also can be made with # which can not be accessed in the outer scope
+  #approveLoan(val) {
+    return true;
+  }
+  // and we static methods which we can access through only available with the class itself not children or family member
 }
 const account1 = new accounts('Alan', 'USD', 1212);
 console.log(account1);
 account1.deposit(1300);
 account1.deposit(1200);
-account1.withdraw(1200);
-account1.withdraw(1200);
-account1.withdraw(1200);
+
+// account1.#approveLoan(1000);
+account1.requestLoan(4000);
+console.log(account1.getMovements().reduce((acc, curr) => acc + curr, 0));
+
+// tepeda har bir methodga return this qaytarganim uchun ularda bir briga this keyword orqali bog'lanma hosil qildim ex;
+//deposit(val) {
+//   this.#movements.push(val);
+//   return this; <-------- mana
+// }
+// chaining methods ====================++>>>>>>>>>>>
+account1.deposit(100).deposit(3000).requestLoan(13000).withdraw(5000);
+console.log(account1.getMovements());
