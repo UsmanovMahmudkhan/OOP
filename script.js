@@ -209,205 +209,257 @@
 // Ford.speedUS = 40; // means getter gets the value from the object itselft while setter is the value entered later like here speedUS = 40 we are setting a new value for the property
 // console.log(Ford);
 
-// lesson
+// // lesson
 
-const Person = function (firstName, birthYear) {
-  this.firstName = firstName;
-  this.birthYear = birthYear;
-};
-Person.prototype.calcage = function () {
-  console.log(`hello ${this.firstName}`);
-};
-const Student = function (firstName, birthYear, course) {
-  Person.call(this, firstName, birthYear); //Shaxs.call(this, ism, tugilganYili) chaqirilganda, Shaxs konstruktori ichidagi this konteksti hozirgi Talaba instansiyasiga o'rnatiladi.
-  // Xususiyatlarni meros qilib olish:
-  // Shaxs.call(this, ism, tugilganYili) ishlatilganda, Shaxs konstruktori chaqiriladi, lekin Shaxs ichidagi this hozirda yaratilayotgan Talaba instansiyasiga tegishli bo'ladi.
-  this.course = course;
-};
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
+// Person.prototype.calcage = function () {
+//   console.log(`hello ${this.firstName}`);
+// };
+// const Student = function (firstName, birthYear, course) {
+//   Person.call(this, firstName, birthYear); //Shaxs.call(this, ism, tugilganYili) chaqirilganda, Shaxs konstruktori ichidagi this konteksti hozirgi Talaba instansiyasiga o'rnatiladi.
+//   // Xususiyatlarni meros qilib olish:
+//   // Shaxs.call(this, ism, tugilganYili) ishlatilganda, Shaxs konstruktori chaqiriladi, lekin Shaxs ichidagi this hozirda yaratilayotgan Talaba instansiyasiga tegishli bo'ladi.
+//   this.course = course;
+// };
 
-Student.prototype = Object.create(Person.prototype);
-Student.prototype.introduce = function () {
-  console.log(
-    `hello my name is ${this.firstName} and i am currently studying ${this.course}`
-  );
-};
+// Student.prototype = Object.create(Person.prototype);
+// Student.prototype.introduce = function () {
+//   console.log(
+//     `hello my name is ${this.firstName} and i am currently studying ${this.course}`
+//   );
+// };
 
-const alan = new Student('Alan', 2003, 'JavaScript');
-console.dir(alan);
-alan.calcage();
-alan.introduce();
-Student.prototype.constructor = Student;
-console.dir(Student.prototype.constructor);
-// console.log();
+// const alan = new Student('Alan', 2003, 'JavaScript');
+// console.dir(alan);
+// alan.calcage();
+// alan.introduce();
+// Student.prototype.constructor = Student;
+// console.dir(Student.prototype.constructor);
+// // console.log();
 
-// challenge
+// // challenge
 
-class Car {
+// class Car {
+//   constructor(brand, speed) {
+//     this.brand = brand;
+
+//     this.speed = speed;
+//   }
+//   speedUp() {
+//     this.speed += 20;
+//     this.#charge--;
+//     console.log(
+//       `${this.brand} going at ${this.speed} has battery of ${this.#charge}%`
+//     );
+//   }
+//   brake() {
+//     this.speed -= 20;
+//     console.log(`${this.speed}km/h`);
+//   }
+// }
+
+// class EV extends Car {
+//   constructor(brand, speed, #charge) {
+//     // Car.call(this, brand, speed);
+//     super(brand, speed);
+//     this.#charge = #charge;
+//   }
+//   get #chargeTo() {
+//     return this.#charge;
+//   }
+//   set #chargeTo(_speed) {
+//     if (_speed < 0) {
+//       return _speed;
+//     }
+//   }
+//   #ChargeBattery(level) {
+//     level = _speed;
+//     this.#charge = level;
+//   }
+// }
+
+// const BMW = new EV('BMW', 120, 90);
+// // EV.prototype.constructor = EV;
+// // Car.prototype.constructor = Car;
+// // BMW.speedUp();
+// BMW.speedUp();
+// BMW.speedUp();
+// BMW.speed = 50;
+// BMW.speedUp();
+// BMW.speedUp();
+// BMW.speedUp();
+// BMW.brake();
+
+// console.log(BMW);
+
+// class PersonCL {
+//   constructor(firstName, birthYear) {
+//     this.birthYear = birthYear;
+//     this.firstName = firstName;
+//   }
+//   calcage() {
+//     console.log(`hello ${this.firstName}`);
+//   }
+//   static greet() {
+//     console.log('we are glad to have you static', this.firstName);
+//   }
+// }
+
+// class Alan extends PersonCL {
+//   constructor(firstName, birthYear, course) {
+//     // Must call super() before accessing 'this'
+//     super(firstName, birthYear); //super personCL inheritanceda personCLning this keywordni Alanga ulaydi
+//     this.course = course;
+//   }
+//   calcage() {
+//     console.log(`i feel sorry for you ${this.firstName} ${this.course}`);
+//   }
+// }
+// const alann = new PersonCL('ALan', 2003);
+// const jonas = new Alan('Jonas', 2003, 'js');
+
+// console.log(jonas);
+// console.log(alann);
+// jonas.calcage();
+// //inharitance
+
+// const TeacherProto = {
+//   calcage() {
+//     console.log(2024 - this.birthYear);
+//   },
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
+
+// const StudentProto = Object.create(TeacherProto);
+// StudentProto.init = function (firstName, birthYear, course) {
+//   TeacherProto.init.call(this, firstName, birthYear); // using teacher's code for DRY . do not repeat yourself
+//   this.course = course;
+// };
+// StudentProto.introduce = function () {
+//   console.log(
+//     `My name is ${this.firstName} and i nowadays study ${this.course || 'js'}`
+//   );
+// };
+// const jake = Object.create(StudentProto);
+// jake.init('Jake', 2002, 'javaScript');
+// console.log(jake);
+// jake.introduce();
+// jake.calcage();
+// // class field proposal
+// // 1) public fields
+// // 2) private fields
+// // 3) public methods
+// // 4) private methods
+// class accounts {
+//   // 1) public fields
+//   locale = navigator.language;
+//   // 2) private fields
+//   #movements = [];
+//   #pin;
+
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     this.#pin = pin;
+//     // this.#movements = [];
+//     // this.locale = navigator.language;
+//   }
+//   // 3) public methods
+//   getMovements() {
+//     return this.#movements;
+//   }
+
+//   requestLoan(val) {
+//     if (this.#approveLoan(val)) this.deposit(val);
+//     console.log('Loan Approved');
+//     return this;
+//   }
+//   //public interface API
+//   deposit(val) {
+//     this.#movements.push(val);
+//     return this;
+//   }
+//   withdraw(val) {
+//     this.deposit(-val); // o'zimiznik scopedagi methodni this keyword yordamida chaqrib ishlatdik
+//     return this;
+//   }
+//   // 4) private methods also can be made with # which can not be accessed in the outer scope
+//   #approveLoan(val) {
+//     return true;
+//   }
+//   // and we static methods which we can access through only available with the class itself not children or family member
+//   static money = 100;
+//   static add() {
+//     console.log('add');
+//   }
+// }
+// const account1 = new accounts('Alan', 'USD', 1212);
+// console.log(account1);
+// account1.deposit(1300);
+// account1.deposit(1200);
+
+// // account1.#approveLoan(1000);
+// account1.requestLoan(4000);
+// console.log(account1.getMovements().reduce((acc, curr) => acc + curr, 0));
+
+// // tepeda har bir methodga return this qaytarganim uchun ularda bir briga this keyword orqali bog'lanma hosil qildim ex;
+// //deposit(val) {
+// //   this.#movements.push(val);
+// //   return this; <-------- mana
+// // }
+// // chaining methods ====================++>>>>>>>>>>>
+// account1.deposit(100).deposit(3000).requestLoan(13000).withdraw(5000);
+// console.log(account1.getMovements());
+//
+class Carr {
   constructor(brand, speed) {
     this.brand = brand;
 
     this.speed = speed;
   }
-  speedUp() {
-    this.speed += 20;
-    this.charge--;
-    console.log(
-      `${this.brand} going at ${this.speed} has battery of ${this.charge}%`
-    );
-  }
+
   brake() {
     this.speed -= 20;
     console.log(`${this.speed}km/h`);
+    return this;
   }
 }
 
-class EV extends Car {
+class EVv extends Carr {
+  #charge;
   constructor(brand, speed, charge) {
     // Car.call(this, brand, speed);
     super(brand, speed);
-    this.charge = charge;
-  }
-  get chargeTo() {
-    return this.charge;
-  }
-  set chargeTo(_speed) {
-    if (_speed < 0) {
-      return _speed;
-    }
-  }
-  ChargeBattery(level) {
-    level = _speed;
-    this.charge = level;
-  }
-}
-
-const BMW = new EV('BMW', 120, 90);
-// EV.prototype.constructor = EV;
-// Car.prototype.constructor = Car;
-// BMW.speedUp();
-BMW.speedUp();
-BMW.speedUp();
-BMW.speed = 50;
-BMW.speedUp();
-BMW.speedUp();
-BMW.speedUp();
-BMW.brake();
-
-console.log(BMW);
-
-class PersonCL {
-  constructor(firstName, birthYear) {
-    this.birthYear = birthYear;
-    this.firstName = firstName;
-  }
-  calcage() {
-    console.log(`hello ${this.firstName}`);
-  }
-  static greet() {
-    console.log('we are glad to have you static', this.firstName);
-  }
-}
-
-class Alan extends PersonCL {
-  constructor(firstName, birthYear, course) {
-    super(firstName, birthYear);
-    this.course = course;
-  }
-  calcage() {
-    console.log(`i feel sorry for you ${this.firstName} ${this.course}`);
-  }
-}
-const alann = new PersonCL('ALan', 2003);
-const jonas = new Alan('Jonas', 2003, 'js');
-
-console.log(jonas);
-console.log(alann);
-jonas.calcage();
-//inharitance
-
-const TeacherProto = {
-  calcage() {
-    console.log(2024 - this.birthYear);
-  },
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
-
-const StudentProto = Object.create(TeacherProto);
-StudentProto.init = function (firstName, birthYear, course) {
-  TeacherProto.init.call(this, firstName, birthYear); // using teacher's code for DRY . do not repeat yourself
-  this.course = course;
-};
-StudentProto.introduce = function () {
-  console.log(
-    `My name is ${this.firstName} and i nowadays study ${this.course || 'js'}`
-  );
-};
-const jake = Object.create(StudentProto);
-jake.init('Jake', 2002, 'javaScript');
-console.log(jake);
-jake.introduce();
-jake.calcage();
-// class field proposal
-// 1) public fields
-// 2) private fields
-// 3) public methods
-// 4) private methods
-class accounts {
-  // 1) public fields
-  locale = navigator.language;
-  // 2) private fields
-  #movements = [];
-  #pin;
-
-  constructor(owner, currency, pin) {
-    this.owner = owner;
-    this.currency = currency;
-    this.#pin = pin;
-    // this.#movements = [];
-    // this.locale = navigator.language;
-  }
-  // 3) public methods
-  getMovements() {
-    return this.#movements;
+    this.#charge = charge;
   }
 
-  requestLoan(val) {
-    if (this.#approveLoan(val)) this.deposit(val);
-    console.log('Loan Approved');
+  speedUp() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.brand} going at ${this.speed} has battery of ${this.#charge}%`
+    );
     return this;
   }
-  //public interface API
-  deposit(val) {
-    this.#movements.push(val);
+  chargeTo(chargeto) {
+    this.#charge += chargeto;
     return this;
   }
-  withdraw(val) {
-    this.deposit(-val); // o'zimiznik scopedagi methodni this keyword yordamida chaqrib ishlatdik
-    return this;
-  }
-  // 4) private methods also can be made with # which can not be accessed in the outer scope
-  #approveLoan(val) {
-    return true;
-  }
-  // and we static methods which we can access through only available with the class itself not children or family member
 }
-const account1 = new accounts('Alan', 'USD', 1212);
-console.log(account1);
-account1.deposit(1300);
-account1.deposit(1200);
 
-// account1.#approveLoan(1000);
-account1.requestLoan(4000);
-console.log(account1.getMovements().reduce((acc, curr) => acc + curr, 0));
-
-// tepeda har bir methodga return this qaytarganim uchun ularda bir briga this keyword orqali bog'lanma hosil qildim ex;
-//deposit(val) {
-//   this.#movements.push(val);
-//   return this; <-------- mana
-// }
-// chaining methods ====================++>>>>>>>>>>>
-account1.deposit(100).deposit(3000).requestLoan(13000).withdraw(5000);
-console.log(account1.getMovements());
+const riven = new EVv('riven', 120, 23);
+console.log(riven);
+// riven.speedUp();
+// riven.speedUp();
+// riven.speedUp();
+// riven.chargeTo(300);
+// riven.speedUp();
+// riven.speedUp();
+// riven.speedUp().chargeTo(30);
+riven.speedUp().speedUp().speedUp().brake().chargeTo(30).speedUp();
