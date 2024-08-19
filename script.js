@@ -463,3 +463,8 @@ console.log(riven);
 // riven.speedUp();
 // riven.speedUp().chargeTo(30);
 riven.speedUp().speedUp().speedUp().brake().chargeTo(30).speedUp();
+riven.speedUp();
+riven.speedUp();
+riven.speedUp().chargeTo(100);
+riven.speedUp().chargeTo(100);
+console.log(riven.__proto__);
