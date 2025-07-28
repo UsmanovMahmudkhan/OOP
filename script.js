@@ -434,7 +434,6 @@ class Carr {
 class EVv extends Carr {
   #charge;
   constructor(brand, speed, charge) {
-    // Car.call(this, brand, speed);
     super(brand, speed);
     this.#charge = charge;
   }
@@ -447,9 +446,14 @@ class EVv extends Carr {
     );
     return this;
   }
+
   chargeTo(chargeto) {
     this.#charge += chargeto;
     return this;
+  }
+
+  getCharge() {
+    return this.#charge;
   }
 }
 
